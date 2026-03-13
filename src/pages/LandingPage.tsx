@@ -63,20 +63,23 @@ function PhotoCard({
   placeholderClass = '',
   aspectRatio = '16 / 9',
   objectFit = 'cover',
+  cardBackground,
+  cardBorder,
 }: {
   photo: { src: string; alt: string };
   placeholderLabel: string;
   placeholderClass?: string;
   aspectRatio?: string;
-  /** 'contain' = whole image fits inside card (no crop); 'cover' = fills card (may crop) */
   objectFit?: 'contain' | 'cover';
+  cardBackground?: string;
+  cardBorder?: string;
 }) {
   return (
     <div
       className="rounded-lg overflow-hidden flex items-center justify-center"
       style={{
-        background: 'var(--color-surface)',
-        border: '1px solid var(--color-border)',
+        background: cardBackground ?? 'var(--color-surface)',
+        border: `1px solid ${cardBorder ?? 'var(--color-border)'}`,
         aspectRatio,
       }}
     >
@@ -135,11 +138,18 @@ const LandingPage: React.FC = () => {
               placeholderClass="text-base"
             />
           </div>
-          {/* Row 2: three smaller photo cards — hero image in second, scale to fit */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
-            <PhotoCard photo={LANDING_PHOTOS[1]} placeholderLabel="Photo 2" aspectRatio="16 / 9" />
-            <PhotoCard photo={LANDING_PHOTOS[2]} placeholderLabel="Photo 3" aspectRatio="16 / 9" objectFit="contain" />
-            <PhotoCard photo={LANDING_PHOTOS[3]} placeholderLabel="Photo 4" aspectRatio="16 / 9" />
+          {/* Row 2: three larger photo cards — hero image in second; light card bg so white image blends */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
+            <PhotoCard photo={LANDING_PHOTOS[1]} placeholderLabel="Photo 2" aspectRatio="4 / 3" />
+            <PhotoCard
+              photo={LANDING_PHOTOS[2]}
+              placeholderLabel="Photo 3"
+              aspectRatio="4 / 3"
+              objectFit="contain"
+              cardBackground="#f5f5f5"
+              cardBorder="#e8e8e8"
+            />
+            <PhotoCard photo={LANDING_PHOTOS[3]} placeholderLabel="Photo 4" aspectRatio="4 / 3" />
           </div>
 
           {/* Headline + CTA block */}
