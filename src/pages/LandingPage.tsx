@@ -51,7 +51,7 @@ const CRED_ITEMS = [
 
 /** Hero photos: [0] = big top card, [1–3] = three smaller cards below. Put images in public/images/ and use /images/photo1.jpg */
 const LANDING_PHOTOS = [
-  { src: '', alt: 'Gigatt Transport — Hero' },
+  { src: '/images/hero.png', alt: 'Gigatt Transport — Hero' },
   { src: '', alt: 'Gigatt Transport — Photo 2' },
   { src: '', alt: 'Gigatt Transport — Photo 3' },
   { src: '', alt: 'Gigatt Transport — Photo 4' },
@@ -62,23 +62,30 @@ function PhotoCard({
   placeholderLabel,
   placeholderClass = '',
   aspectRatio = '16 / 9',
+  blendWhite = false,
 }: {
   photo: { src: string; alt: string };
   placeholderLabel: string;
   placeholderClass?: string;
   aspectRatio?: string;
+  blendWhite?: boolean;
 }) {
   return (
     <div
       className="rounded-lg overflow-hidden"
       style={{
-        background: 'var(--color-surface)',
+        background: blendWhite ? 'var(--color-bg)' : 'var(--color-surface)',
         border: '1px solid var(--color-border)',
         aspectRatio,
       }}
     >
       {photo.src ? (
-        <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover" />
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          className="w-full h-full object-cover"
+          style={blendWhite ? { mixBlendMode: 'multiply' } : undefined}
+        />
       ) : (
         <div
           className={`w-full h-full flex items-center justify-center mono-font text-sm ${placeholderClass}`}
@@ -118,13 +125,14 @@ const LandingPage: React.FC = () => {
         />
 
         <div className="relative z-10 page-container pt-24 pb-16">
-          {/* Row 1: one big photo card */}
+          {/* Row 1: one big photo card (blendWhite strips white background) */}
           <div className="mb-4">
             <PhotoCard
               photo={LANDING_PHOTOS[0]}
               placeholderLabel="Hero photo"
               aspectRatio="21 / 9"
               placeholderClass="text-base"
+              blendWhite
             />
           </div>
           {/* Row 2: three smaller photo cards */}
