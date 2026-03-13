@@ -37,10 +37,128 @@ body {
   width: 100%;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
 #root {
   width: 100%;
   min-height: 100vh;
+}
+
+/* Road borders: realistic texture, dashed center line, scroll-linked truck */
+.road-border {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+.road-border--left { left: 0; }
+.road-border--right { right: 0; }
+.road-border__texture {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #1a1b1c 0%, #252628 15%, #2a2b2d 30%, #222324 50%, #28292b 70%, #1e1f21 100%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 3px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 4px,
+      rgba(255,255,255,0.02) 4px,
+      rgba(255,255,255,0.02) 5px
+    ),
+    linear-gradient(105deg, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(255,255,255,0.03) 100%);
+  background-color: #232527;
+}
+.road-border--right .road-border__texture {
+  background:
+    linear-gradient(180deg, #1a1b1c 0%, #252628 15%, #2a2b2d 30%, #222324 50%, #28292b 70%, #1e1f21 100%),
+    repeating-linear-gradient(
+      270deg,
+      transparent 0,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 3px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 4px,
+      rgba(255,255,255,0.02) 4px,
+      rgba(255,255,255,0.02) 5px
+    ),
+    linear-gradient(255deg, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(255,255,255,0.03) 100%);
+  background-color: #232527;
+}
+.road-border__dashed {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    180deg,
+    var(--color-accent) 0,
+    var(--color-accent) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+  opacity: 0.95;
+  box-shadow: 0 0 4px rgba(244,167,21,0.3);
+}
+.road-border__edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px rgba(244,167,21,0.4);
+}
+.road-border__edge--right { right: 0; }
+.road-border__edge--left { left: 0; }
+.road-border__truck {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.08s ease-out;
+  z-index: 2;
+}
+.road-border--right .road-border__truck {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Centered page container: always centered with generous spacing (works with or without Tailwind) */
+.page-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+.page-container-narrow {
+  width: 100%;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 /* Layout fallbacks so content is centered and readable when Tailwind is slow or fails (e.g. StackBlitz) */
@@ -49,6 +167,7 @@ body {
 .max-w-xl { max-width: 36rem; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
 .w-full { width: 100%; }
 .min-h-screen { min-height: 100vh; }
 .flex { display: flex; }
@@ -62,6 +181,8 @@ body {
 .gap-4 { gap: 1rem; }
 .gap-6 { gap: 1.5rem; }
 .gap-8 { gap: 2rem; }
+.gap-12 { gap: 3rem; }
+.gap-16 { gap: 4rem; }
 .relative { position: relative; }
 .absolute { position: absolute; }
 .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
@@ -79,7 +200,12 @@ body {
 .pb-20 { padding-bottom: 5rem; }
 .pb-6 { padding-bottom: 1.5rem; }
 .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
 .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+.py-28 { padding-top: 7rem; padding-bottom: 7rem; }
+.pb-20 { padding-bottom: 5rem; }
+.mb-16 { margin-bottom: 4rem; }
 @media (min-width: 640px) {
   .sm\:flex-row { flex-direction: row; }
 }

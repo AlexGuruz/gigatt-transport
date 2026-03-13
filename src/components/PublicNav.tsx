@@ -24,7 +24,7 @@ const PublicNav: React.FC = () => {
         borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+      <div className="page-container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
           <span className="display-font text-2xl" style={{ color: 'var(--color-accent)' }}>
             GIGATT

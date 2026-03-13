@@ -89,10 +89,10 @@ const LandingPage: React.FC = () => {
           OVR
         </div>
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-24 pb-20 flex justify-center">
-          <div className="max-w-3xl w-full">
+        <div className="relative z-10 page-container pt-24 pb-20 flex justify-center">
+          <div className="page-container-narrow text-center">
             {/* Label */}
-            <div className="anim-fade-up flex items-center gap-3 mb-6">
+            <div className="anim-fade-up flex items-center justify-center gap-3 mb-6">
               <span className="accent-line" />
               <span className="mono-font text-xs tracking-widest" style={{ color: 'var(--color-accent)' }}>
                 OVERSIZE / OVERWEIGHT TRANSPORT SUPPORT
@@ -118,7 +118,7 @@ const LandingPage: React.FC = () => {
               across Texas, Arkansas, Oklahoma, and beyond.
             </p>
 
-            <div className="anim-fade-up-delay-3 flex flex-col sm:flex-row gap-4">
+            <div className="anim-fade-up-delay-3 flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/request">
                 <button className="btn-primary flex items-center gap-2 text-base">
                   REQUEST A ROUTE / JOB
@@ -127,7 +127,7 @@ const LandingPage: React.FC = () => {
               </Link>
               <a
                 href="#services"
-                className="flex items-center gap-2 px-6 py-3 text-sm border border-opacity-30 rounded transition-colors hover:border-opacity-60"
+                className="flex items-center justify-center gap-2 px-6 py-3 text-sm border border-opacity-30 rounded transition-colors hover:border-opacity-60"
                 style={{
                   borderColor: 'var(--color-border)',
                   color: 'var(--color-muted)',
@@ -139,7 +139,7 @@ const LandingPage: React.FC = () => {
             </div>
 
             {/* State chips */}
-            <div className="anim-fade-up-delay-4 flex flex-wrap gap-2 mt-10">
+            <div className="anim-fade-up-delay-4 flex flex-wrap gap-2 mt-10 justify-center">
               {STATES.map(s => (
                 <span
                   key={s}
@@ -182,8 +182,8 @@ const LandingPage: React.FC = () => {
           background: 'var(--color-surface)',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="page-container py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {CRED_ITEMS.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-3">
                 <Icon size={16} style={{ color: 'var(--color-accent)', flexShrink: 0 }} />
@@ -197,9 +197,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* ── SERVICES ────────────────────────────────────────── */}
-      <section id="services" className="py-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-14">
+      <section id="services" className="py-28">
+        <div className="page-container">
+          <div className="mb-16">
             <div className="flex items-center gap-3 mb-4">
               <span className="accent-line" />
               <span className="mono-font text-xs tracking-widest" style={{ color: 'var(--color-accent)' }}>
@@ -211,7 +211,7 @@ const LandingPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid md:grid-cols-2 gap-8">
             {SERVICES.map(({ icon: Icon, title, subtitle, desc }) => (
               <div
                 key={title}
@@ -259,11 +259,11 @@ const LandingPage: React.FC = () => {
       {/* ── GEOGRAPHIC COVERAGE ─────────────────────────────── */}
       <section
         id="coverage"
-        className="py-24"
+        className="py-28"
         style={{ background: 'var(--color-surface)' }}
       >
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="page-container">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="accent-line" />
@@ -328,14 +328,14 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* ── CTA ─────────────────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-28 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(244,167,21,0.06) 0%, transparent 70%)',
           }}
         />
-        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+        <div className="relative z-10 page-container-narrow text-center">
           <h2 className="display-font text-5xl md:text-7xl mb-6" style={{ color: 'var(--color-text)' }}>
             READY TO<br /><span style={{ color: 'var(--color-accent)' }}>MOVE?</span>
           </h2>
@@ -359,7 +359,7 @@ const LandingPage: React.FC = () => {
           background: 'var(--color-surface)',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
+        <div className="page-container py-16 grid md:grid-cols-3 gap-12">
           <div>
             <div className="display-font text-2xl mb-2" style={{ color: 'var(--color-accent)' }}>
               GIGATT TRANSPORT LLC
@@ -399,7 +399,7 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
         <div
-          className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+          className="page-container py-6 flex justify-between items-center"
           style={{ borderTop: '1px solid var(--color-border)' }}
         >
           <span className="mono-font text-xs" style={{ color: 'var(--color-muted)' }}>
