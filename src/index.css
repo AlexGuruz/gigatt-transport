@@ -44,6 +44,16 @@ body {
   min-height: 100vh;
 }
 
+/* Inset main content so fixed road borders don't overlap text/UI */
+body.public-page {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+body.admin-page {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* Road borders: realistic texture, dashed center line, scroll-linked truck */
 .road-border {
   position: fixed;
@@ -130,7 +140,8 @@ body {
   left: 50%;
   transform: translateX(-50%);
   transition: top 0.08s ease-out;
-  z-index: 2;
+  z-index: 10;
+  opacity: 1;
 }
 .road-border--right .road-border__truck {
   left: 50%;

@@ -4,35 +4,40 @@ import { useLocation } from 'react-router-dom';
 function TruckIcon({ flip = false, style }: { flip?: boolean; style?: React.CSSProperties }) {
   return (
     <svg
-      width="22"
-      height="14"
-      viewBox="0 0 22 14"
+      width="18"
+      height="44"
+      viewBox="0 0 14 38"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{
         transform: flip ? 'scaleX(-1)' : undefined,
-        filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))',
+        filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.9)) drop-shadow(0 0 2px rgba(244,167,21,0.6))',
         ...style,
       }}
     >
-      {/* trailer */}
-      <rect x="0" y="4" width="14" height="6" rx="0.5" fill="#2d3748" stroke="#1a202c" strokeWidth="0.4" />
-      <rect x="1" y="5" width="12" height="4" fill="#374151" opacity="0.6" />
-      {/* cab */}
-      <path d="M14 3.5 L20 3.5 L21 6 L21 10 L14 10 Z" fill="#1e293b" stroke="#0f172a" strokeWidth="0.4" />
-      <path d="M15 4.5 L19.5 4.5 L20 6 L20 9 L15 9 Z" fill="#334155" opacity="0.8" />
+      {/* 18-wheeler drawn vertically: cab at top (front), trailer below — drives up/down the road */}
+      {/* trailer (long) */}
+      <rect x="1" y="18" width="12" height="16" rx="0.8" fill="#4a5568" stroke="#f4a715" strokeWidth="0.6" />
+      <rect x="2" y="19" width="10" height="14" fill="#5a6578" opacity="0.9" />
+      {/* trailer wheels */}
+      <circle cx="4" cy="32" r="1.6" fill="#171717" stroke="#374151" strokeWidth="0.4" />
+      <circle cx="4" cy="32" r="0.8" fill="#525252" />
+      <circle cx="10" cy="32" r="1.6" fill="#171717" stroke="#374151" strokeWidth="0.4" />
+      <circle cx="10" cy="32" r="0.8" fill="#525252" />
+      <circle cx="4" cy="22" r="1.6" fill="#171717" stroke="#374151" strokeWidth="0.4" />
+      <circle cx="10" cy="22" r="1.6" fill="#171717" stroke="#374151" strokeWidth="0.4" />
+      {/* cab (front of truck when driving down) */}
+      <path d="M1 4 L13 4 L13 16 L1 16 Z" fill="#3d4a5c" stroke="#f4a715" strokeWidth="0.6" />
+      <path d="M2 5 L12 5 L12 15 L2 15 Z" fill="#4a5568" opacity="0.95" />
       {/* windshield */}
-      <path d="M16 5 L18.5 5 L19 6.5 L19 8.5 L16 8.5 Z" fill="#64748b" opacity="0.9" />
-      {/* wheels - rear */}
-      <circle cx="3" cy="10.5" r="1.4" fill="#171717" stroke="#0a0a0a" strokeWidth="0.3" />
-      <circle cx="3" cy="10.5" r="0.7" fill="#404040" />
-      <circle cx="7" cy="10.5" r="1.4" fill="#171717" stroke="#0a0a0a" strokeWidth="0.3" />
-      <circle cx="7" cy="10.5" r="0.7" fill="#404040" />
-      {/* wheels - front */}
-      <circle cx="18" cy="10.5" r="1.4" fill="#171717" stroke="#0a0a0a" strokeWidth="0.3" />
-      <circle cx="18" cy="10.5" r="0.7" fill="#404040" />
-      {/* marker light */}
-      <circle cx="20.5" cy="5" r="0.35" fill="#f4a715" />
+      <path d="M3 6 L11 6 L11 10 L3 10 Z" fill="#94a3b8" opacity="0.95" />
+      {/* cab wheels */}
+      <circle cx="4" cy="14" r="1.6" fill="#171717" stroke="#374151" strokeWidth="0.4" />
+      <circle cx="4" cy="14" r="0.8" fill="#525252" />
+      <circle cx="10" cy="14" r="1.6" fill="#171717" stroke="#374151" strokeWidth="0.4" />
+      <circle cx="10" cy="14" r="0.8" fill="#525252" />
+      {/* marker light (top/front) */}
+      <circle cx="7" cy="2" r="0.6" fill="#f4a715" />
     </svg>
   );
 }
@@ -53,8 +58,8 @@ export const RoadBorders: React.FC = () => {
 
   const docHeight = typeof document !== 'undefined' ? Math.max(1, document.documentElement.scrollHeight - window.innerHeight) : 1;
   const winH = typeof window !== 'undefined' ? window.innerHeight : 800;
-  const truckTravel = docHeight > 0 ? (scrollY / docHeight) * (winH - 120) : scrollY * 0.35;
-  const truckTop = Math.min(winH - 40, Math.max(60, 80 + truckTravel));
+  const truckTravel = docHeight > 0 ? (scrollY / docHeight) * (winH - 140) : scrollY * 0.35;
+  const truckTop = Math.min(winH - 50, Math.max(100, 100 + truckTravel));
 
   return (
     <>

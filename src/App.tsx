@@ -14,9 +14,16 @@ function BodyClassSync() {
   const { pathname } = useLocation();
   useEffect(() => {
     const isAdmin = pathname.startsWith('/admin');
-    if (isAdmin) document.body.classList.add('admin-page');
-    else document.body.classList.remove('admin-page');
-    return () => document.body.classList.remove('admin-page');
+    if (isAdmin) {
+      document.body.classList.add('admin-page');
+      document.body.classList.remove('public-page');
+    } else {
+      document.body.classList.add('public-page');
+      document.body.classList.remove('admin-page');
+    }
+    return () => {
+      document.body.classList.remove('admin-page', 'public-page');
+    };
   }, [pathname]);
   return null;
 }
