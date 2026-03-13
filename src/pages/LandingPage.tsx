@@ -89,8 +89,8 @@ const LandingPage: React.FC = () => {
           OVR
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24 pb-20">
-          <div className="max-w-3xl">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-24 pb-20 flex justify-center">
+          <div className="max-w-3xl w-full">
             {/* Label */}
             <div className="anim-fade-up flex items-center gap-3 mb-6">
               <span className="accent-line" />
