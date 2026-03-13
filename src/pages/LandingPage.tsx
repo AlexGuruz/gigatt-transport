@@ -49,14 +49,56 @@ const CRED_ITEMS = [
   { icon: MapPin, label: 'Documented Route History' },
 ];
 
+/** Hero photos: [0] = big top card, [1–3] = three smaller cards below. Put images in public/images/ and use /images/photo1.jpg */
+const LANDING_PHOTOS = [
+  { src: '', alt: 'Gigatt Transport — Hero' },
+  { src: '', alt: 'Gigatt Transport — Photo 2' },
+  { src: '', alt: 'Gigatt Transport — Photo 3' },
+  { src: '', alt: 'Gigatt Transport — Photo 4' },
+];
+
+function PhotoCard({
+  photo,
+  placeholderLabel,
+  placeholderClass = '',
+  aspectRatio = '16 / 9',
+}: {
+  photo: { src: string; alt: string };
+  placeholderLabel: string;
+  placeholderClass?: string;
+  aspectRatio?: string;
+}) {
+  return (
+    <div
+      className="rounded-lg overflow-hidden"
+      style={{
+        background: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
+        aspectRatio,
+      }}
+    >
+      {photo.src ? (
+        <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover" />
+      ) : (
+        <div
+          className={`w-full h-full flex items-center justify-center mono-font text-sm ${placeholderClass}`}
+          style={{ color: 'var(--color-muted)' }}
+        >
+          {placeholderLabel}
+        </div>
+      )}
+    </div>
+  );
+}
+
 const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       <PublicNav />
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── HERO: 4 photo cards (1 big + 3 small) + MOVE BIG / MOVE RIGHT ── */}
       <section
-        className="relative min-h-screen flex items-center overflow-hidden"
+        className="relative overflow-hidden"
         style={{
           background: `
             radial-gradient(ellipse 80% 60% at 60% 40%, rgba(244,167,21,0.07) 0%, transparent 70%),
@@ -64,7 +106,6 @@ const LandingPage: React.FC = () => {
           `,
         }}
       >
-        {/* Grid pattern overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -76,48 +117,47 @@ const LandingPage: React.FC = () => {
           }}
         />
 
-        {/* Large BG text */}
-        <div
-          className="absolute right-0 top-1/2 -translate-y-1/2 display-font select-none pointer-events-none"
-          style={{
-            fontSize: 'clamp(8rem, 22vw, 22rem)',
-            color: 'rgba(244,167,21,0.03)',
-            lineHeight: 1,
-            letterSpacing: '-0.02em',
-          }}
-        >
-          OVR
-        </div>
+        <div className="relative z-10 page-container pt-24 pb-16">
+          {/* Row 1: one big photo card */}
+          <div className="mb-4">
+            <PhotoCard
+              photo={LANDING_PHOTOS[0]}
+              placeholderLabel="Hero photo"
+              aspectRatio="21 / 9"
+              placeholderClass="text-base"
+            />
+          </div>
+          {/* Row 2: three smaller photo cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+            <PhotoCard photo={LANDING_PHOTOS[1]} placeholderLabel="Photo 2" aspectRatio="16 / 9" />
+            <PhotoCard photo={LANDING_PHOTOS[2]} placeholderLabel="Photo 3" aspectRatio="16 / 9" />
+            <PhotoCard photo={LANDING_PHOTOS[3]} placeholderLabel="Photo 4" aspectRatio="16 / 9" />
+          </div>
 
-        <div className="relative z-10 page-container pt-24 pb-20 flex justify-center">
-          <div className="page-container-narrow text-center">
-            {/* Label */}
+          {/* Headline + CTA block */}
+          <div className="page-container-narrow text-center mx-auto">
             <div className="anim-fade-up flex items-center justify-center gap-3 mb-6">
               <span className="accent-line" />
               <span className="mono-font text-xs tracking-widest" style={{ color: 'var(--color-accent)' }}>
                 OVERSIZE / OVERWEIGHT TRANSPORT SUPPORT
               </span>
             </div>
-
-            {/* Headline */}
             <h1
               className="anim-fade-up-delay-1 display-font mb-6 leading-none"
-              style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)', color: 'var(--color-text)' }}
+              style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', color: 'var(--color-text)' }}
             >
               MOVE BIG.
               <br />
               <span style={{ color: 'var(--color-accent)' }}>MOVE RIGHT.</span>
             </h1>
-
             <p
-              className="anim-fade-up-delay-2 text-lg mb-10 max-w-xl leading-relaxed"
+              className="anim-fade-up-delay-2 text-lg mb-10 max-w-xl mx-auto leading-relaxed"
               style={{ color: 'var(--color-muted)' }}
             >
               Gigatt Transport LLC provides certified high-pole escort, front pilot,
               rear chase, and permit-friendly route planning for oversize and overweight loads
               across Texas, Arkansas, Oklahoma, and beyond.
             </p>
-
             <div className="anim-fade-up-delay-3 flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/request">
                 <button className="btn-primary flex items-center gap-2 text-base">
@@ -137,8 +177,6 @@ const LandingPage: React.FC = () => {
                 <ChevronRight size={14} />
               </a>
             </div>
-
-            {/* State chips */}
             <div className="anim-fade-up-delay-4 flex flex-wrap gap-2 mt-10 justify-center">
               {STATES.map(s => (
                 <span
@@ -166,12 +204,6 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom fade */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-          style={{ background: 'linear-gradient(transparent, var(--color-bg))' }}
-        />
       </section>
 
       {/* ── CREDIBILITY STRIP ───────────────────────────────── */}

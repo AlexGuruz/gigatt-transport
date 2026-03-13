@@ -2,6 +2,12 @@
 
 You can edit all site copy and labels in these files. No build step needed for content-only changes—save and refresh.
 
+## See changes live
+
+- **Local:** Run `npm start` in the project folder. The app runs at http://localhost:3000 and **updates automatically** when you save a file (hot reload).
+- **StackBlitz:** Open the project, then save any file (or refresh the preview). Changes appear in the preview panel.
+- **After editing:** Save the file (Ctrl+S). If hot reload doesn’t fire, refresh the browser (F5 or Ctrl+R).
+
 ## Landing page (home)
 
 **File:** `src/pages/LandingPage.tsx`
@@ -24,6 +30,7 @@ You can edit all site copy and labels in these files. No build step needed for c
 | Contact placeholder (phone, email) | Search for `(xxx) xxx-xxxx`, `contact@gigatttransport.com` |
 | Quick links | “Request a Route / Job”, “Services” |
 | Copyright | `© 2025 Gigatt Transport LLC` |
+| **Hero photos (4)** | `const LANDING_PHOTOS` — [0] = big top card, [1–3] = three cards below. Set `src` to e.g. `/images/photo1.jpg` (put files in `public/images/`). |
 
 ## Request form page
 
