@@ -51,9 +51,9 @@ const CRED_ITEMS = [
 
 /** Hero photos: [0] = big top card, [1–3] = three smaller cards below. Put images in public/images/ and use /images/photo1.jpg */
 const LANDING_PHOTOS = [
-  { src: '/images/hero.png', alt: 'Gigatt Transport — Hero' },
+  { src: '', alt: 'Gigatt Transport — Hero' },
   { src: '', alt: 'Gigatt Transport — Photo 2' },
-  { src: '', alt: 'Gigatt Transport — Photo 3' },
+  { src: '/images/hero.png', alt: 'Gigatt Transport — Photo 3' },
   { src: '', alt: 'Gigatt Transport — Photo 4' },
 ];
 
@@ -62,19 +62,20 @@ function PhotoCard({
   placeholderLabel,
   placeholderClass = '',
   aspectRatio = '16 / 9',
-  blendWhite = false,
+  objectFit = 'cover',
 }: {
   photo: { src: string; alt: string };
   placeholderLabel: string;
   placeholderClass?: string;
   aspectRatio?: string;
-  blendWhite?: boolean;
+  /** 'contain' = whole image fits inside card (no crop); 'cover' = fills card (may crop) */
+  objectFit?: 'contain' | 'cover';
 }) {
   return (
     <div
-      className="rounded-lg overflow-hidden"
+      className="rounded-lg overflow-hidden flex items-center justify-center"
       style={{
-        background: blendWhite ? 'var(--color-bg)' : 'var(--color-surface)',
+        background: 'var(--color-surface)',
         border: '1px solid var(--color-border)',
         aspectRatio,
       }}
@@ -83,8 +84,8 @@ function PhotoCard({
         <img
           src={photo.src}
           alt={photo.alt}
-          className="w-full h-full object-cover"
-          style={blendWhite ? { mixBlendMode: 'multiply' } : undefined}
+          className="w-full h-full"
+          style={{ objectFit }}
         />
       ) : (
         <div
@@ -125,20 +126,19 @@ const LandingPage: React.FC = () => {
         />
 
         <div className="relative z-10 page-container pt-24 pb-16">
-          {/* Row 1: one big photo card (blendWhite strips white background) */}
+          {/* Row 1: one big photo card (placeholder) */}
           <div className="mb-4">
             <PhotoCard
               photo={LANDING_PHOTOS[0]}
               placeholderLabel="Hero photo"
               aspectRatio="21 / 9"
               placeholderClass="text-base"
-              blendWhite
             />
           </div>
-          {/* Row 2: three smaller photo cards */}
+          {/* Row 2: three smaller photo cards — hero image in second, scale to fit */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
             <PhotoCard photo={LANDING_PHOTOS[1]} placeholderLabel="Photo 2" aspectRatio="16 / 9" />
-            <PhotoCard photo={LANDING_PHOTOS[2]} placeholderLabel="Photo 3" aspectRatio="16 / 9" />
+            <PhotoCard photo={LANDING_PHOTOS[2]} placeholderLabel="Photo 3" aspectRatio="16 / 9" objectFit="contain" />
             <PhotoCard photo={LANDING_PHOTOS[3]} placeholderLabel="Photo 4" aspectRatio="16 / 9" />
           </div>
 
